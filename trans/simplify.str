@@ -21,4 +21,7 @@ rules
 		Add(X, X) -> Mul(2, X)
 		
 	simplify:
+		|[X + X]| -> |[2 X]|
+		
+	simplify:
 		Backsolve(x, x) -> Identity()

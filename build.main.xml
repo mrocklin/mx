@@ -22,6 +22,8 @@
         <property name="build.stratego.args" value="
                         --library
                         -I &quot;${trans}&quot;
+        	  			-I &quot;${lib}&quot;
+        				-I &quot;${include}&quot;
                         -I &quot;${basedir}&quot;
                         -la stratego-lib -la stratego-sglr -la stratego-gpp -la stratego-xtc -la stratego-aterm"/>
         
@@ -40,5 +42,12 @@
         <import file="build.generated.xml"/>
     
         <!-- Main target -->
-        <target name="all" depends="spoofaximp.default.ctree"/>
+        <target name="all" depends="meta-syntax, spoofaximp.default"/>
+	      <target name="meta-syntax">
+	      <antcall target="sdf2table">
+	            <param name="sdfmodule" value="Stratego-mx"/>
+	                <param name="build.sdf.imports" value="${build.sdf.imports} -Idef ${lib}/StrategoMix.def"/>
+	                <param name="include" value="${lib}"/>
+	        </antcall>
+	    </target>
     </project>

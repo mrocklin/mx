@@ -1,0 +1,41 @@
+%% Grammar for the mx language
+%% By default, based on an example "entities" syntax
+module Stratego-mx
+
+imports Common
+
+exports
+
+  context-free start-symbols
+    Exp
+
+  context-free syntax
+	
+	Id             -> Exp {cons("Matrix")} 
+    Int		       -> Exp {cons("Int")}
+    Float	       -> Exp {cons("Float")} 
+    "Identity"     -> Exp {cons("Identity")}
+    "(" Exp ")"    -> Exp {bracket}
+    
+    Exp Exp        -> Exp {left, cons("Mul")} 
+     
+    Exp "+" Exp    -> Exp {left, cons("Add")} 
+    Exp "-" Exp    -> Exp {left, cons("Sub")}
+    Exp "\\" Exp   -> Exp {left, cons("Backsolve")}
+    
+    Exp "'" 	   -> Exp {cons("Transpose")}
+    "inverse("Exp")" -> Exp{cons("Inverse")}
+
+    
+  context-free priorities 
+  	{right:
+  	 Exp "'" 	-> Exp	
+  	}
+  > {left:
+      Exp Exp -> Exp
+      Exp "\\" Exp -> Exp
+    } 
+  > {left:
+      Exp "+" Exp -> Exp
+      Exp "-" Exp -> Exp
+    }
