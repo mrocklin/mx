@@ -1,0 +1,32 @@
+module bool
+
+imports Common
+
+exports
+
+  sorts
+    Bool
+    
+  context-free start-symbols
+    Bool 
+    
+  context-free syntax
+    Id -> Bool {cons("BoolSymbol")}
+    "true" -> Bool {cons("True")}
+    "false" -> Bool {cons("False")}
+    Bool "and" Bool -> Bool {left, cons("And")}
+    Bool "or" Bool -> Bool {left, cons("Or")}
+    
+  context-free priorities 
+   {left:
+     Bool "and" Bool -> Bool 
+   }
+   >
+   {left:
+     Bool "or" Bool  -> Bool
+   }
+  lexical syntax
+   "true"   -> Id {reject}
+   "false"   -> Id {reject}
+   "or"   -> LowerId {reject}
+   "and"   -> LowerId {reject}
