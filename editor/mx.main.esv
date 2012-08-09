@@ -1,0 +1,16 @@
+module mx.main
+
+imports mx-Builders mx-Colorer mx-Completions mx-Folding mx-Outliner mx-References mx-Syntax
+
+language General properties
+                  
+  name          : mx
+  id            : mx
+  extends       : Root
+                  
+  description   : "Spoofax/IMP-generated editor for the mx language"
+  url           : http://strategoxt.org
+                  
+  extensions    : mx
+  table         : include/mx.tbl
+  start symbols : Start

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?eclipse version="3.0"?>
+
+<plugin>
+       <extension point="org.eclipse.imp.runtime.languageDescription">
+          <language extensions="mx" description="mx" language="mx" derivedFrom="DynamicRoot" validator="mx.MxValidator" validatorClass="mx.MxValidator"></language>
+       </extension>
+       <extension id="mx.parser" name="mx Parser" point="org.eclipse.imp.runtime.parser">
+          <parser class="mx.MxParseController" language="mx">
+          </parser>
+       </extension>    
+    </plugin>
