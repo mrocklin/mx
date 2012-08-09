@@ -44,7 +44,7 @@ rules // Main editor interface (defined by editor/mx-Builders and -References.es
     (selected, position, ast, path, project-path) -> (filename, result)
     with
       filename := <guarantee-extension(|"aterm")> path;
-      result   := selected // we just return the input term
+      result   := <simplify-all>selected // we just return the input term
   
   // Resolves a reference when the user control-clicks or presses F3 in the editor.
   // Only succeeds for nodes of the form Type(_) for which GetEntity is defined.
