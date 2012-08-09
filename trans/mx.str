@@ -9,6 +9,7 @@ imports
   check
   generate
   refactor
+  simplify
 
 rules // Main editor interface (defined by editor/mx-Builders and -References.esv)
   
@@ -23,12 +24,14 @@ rules // Main editor interface (defined by editor/mx-Builders and -References.es
       warnings := <collect-all(constraint-warning, conc)> ast;
       notes    := <collect-all(constraint-note, conc)> ast
   
-  // Transforms a selection to Java
-  generate-java:
+  generate-eval:
     (selected, position, ast, path, project-path) -> (filename, result)
     with
-      filename := <guarantee-extension(|"java")> path;
-      result   := <to-java> selected
+      editor-init;
+      analyze;
+      filename := <guarantee-extension(|"result.aterm")> path;
+      result   := <simplify> selected
+
   
   // Prints the abstract syntax ATerm of a selection.
   generate-aterm:
