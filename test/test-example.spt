@@ -6,17 +6,16 @@ module test-example
 language mx
 
 setup Common [[
-  module example
+
 ]]
 
-test Simple entity [[
-  entity User {
-    name : String
-  }
+test add [[
+  X + Y
+]] 0 errors
+test mul [[
+  X Y
+]] 0 errors
+test Transpose [[
+  X'
 ]] 0 errors
 
-test Entity with reference to non-existing entity [[
-  entity User {
-    name : Strin
-  }
-]] 1 error
