@@ -10,6 +10,7 @@ imports
   generate
   refactor
   simplify
+  bool
 
 rules // Main editor interface (defined by editor/mx-Builders and -References.esv)
   
@@ -23,14 +24,19 @@ rules // Main editor interface (defined by editor/mx-Builders and -References.es
       errors   := <collect-all(constraint-error, conc)> ast;
       warnings := <collect-all(constraint-warning, conc)> ast;
       notes    := <collect-all(constraint-note, conc)> ast
-  
+  simplify-all:
+        e -> result
+      where
+        result1 := <bottomup(try(do-simplify))> e;
+        result := <bottomup(try(bool-do-simplify))> result1
+        
   generate-eval:
     (selected, position, ast, path, project-path) -> (filename, result)
     with
       editor-init;
       analyze;
       filename := <guarantee-extension(|"result.aterm")> path;
-      result   := <simplify> selected
+      result   := <simplify-all> selected
 
   
   // Prints the abstract syntax ATerm of a selection.

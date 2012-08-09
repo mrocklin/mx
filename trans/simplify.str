@@ -8,8 +8,8 @@ imports
 rules
         do-simplify:
             e -> result
-      where
-        result := <bottomup(try(simplify))> e
+        where
+            result := <bottomup(try(simplify))> e
       
         simplify:
                 Transpose(Transpose(x)) -> x

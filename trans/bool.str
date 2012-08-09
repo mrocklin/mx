@@ -1,0 +1,26 @@
+module bool
+
+imports
+  libstratego-lib
+  include/mx
+  lib/editor-common.generated
+
+rules
+        bool-do-simplify:
+            e -> result
+      where
+        result := <bottomup(try(simplify))> e
+      
+        simplify:
+                And(True(), True()) -> True()
+        simplify:        
+                And(x, False()) -> False()
+        simplify:        
+                And(False(), x) -> False()
+        simplify:        
+                Or(True(), x) -> True()
+        simplify:        
+                Or(x, True()) -> True()
+        simplify:        
+                Or(False(), False()) -> False()        
+        
