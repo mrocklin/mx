@@ -1,4 +1,4 @@
 /**
 * Example mx program.
 */  
-20.3 X + inverse(Y) + (Y + X)' X'\Y + (A')'  + X\X 
+a X + inverse(Y) + (Y + X)' X'\Y + (A')'  + X\X   

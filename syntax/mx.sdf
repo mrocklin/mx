@@ -10,32 +10,44 @@ exports
     Exp
 
   context-free syntax
-	
-	Id             -> Exp {cons("Matrix")} 
-    Int		       -> Exp {cons("Int")}
-    Float	       -> Exp {cons("Float")} 
-    "Identity"     -> Exp {cons("Identity")}
-    "(" Exp ")"    -> Exp {bracket}
+	MatrixExp ->  Exp
+	ScalarExp ->  Exp
+	UpperId        -> MatrixExp {cons("Matrix")}
+	LowerId        -> ScalarExp {cons("Scalar")}  
+    Int		       -> ScalarExp {cons("Int")}
+    Float	       -> ScalarExp {cons("Float")} 
+    "Identity"     -> MatrixExp {cons("Identity")}
+	"(" MatrixExp ")"    -> MatrixExp {bracket}
+	"(" ScalarExp ")"    -> ScalarExp {bracket}    
     
-    Exp Exp        -> Exp {left, cons("Mul")} 
+    MatrixExp MatrixExp -> MatrixExp {left, cons("Mul")}
+    ScalarExp MatrixExp -> MatrixExp {left, cons("Mul")}
+    ScalarExp ScalarExp -> ScalarExp {left, cons("Mul")} 
      
-    Exp "+" Exp    -> Exp {left, cons("Add")} 
-    Exp "-" Exp    -> Exp {left, cons("Sub")}
-    Exp "\\" Exp   -> Exp {left, cons("Backsolve")}
+    MatrixExp "+" MatrixExp    -> MatrixExp {left, cons("Add")}
+    ScalarExp "+" ScalarExp    -> ScalarExp {left, cons("Add")}
+    MatrixExp "-" MatrixExp    -> MatrixExp {left, cons("Sub")}
+    ScalarExp "-" ScalarExp    -> ScalarExp {left, cons("Sub")} 
     
-    Exp "'" 	   -> Exp {cons("Transpose")}
-    "inverse("Exp")" -> Exp{cons("Inverse")}
+    MatrixExp "\\" MatrixExp   -> MatrixExp {left, cons("Backsolve")}
+    
+    MatrixExp "'" 	   -> MatrixExp {cons("Transpose")}
+    "inverse("MatrixExp")" -> MatrixExp{cons("Inverse")}
 
     
   context-free priorities 
   	{right:
-  	 Exp "'" 	-> Exp	
+  	 MatrixExp "'" 	-> MatrixExp	
   	}
   > {left:
-      Exp Exp -> Exp
-      Exp "\\" Exp -> Exp
+      MatrixExp MatrixExp -> MatrixExp
+      ScalarExp MatrixExp -> MatrixExp
+      ScalarExp ScalarExp -> ScalarExp
+      MatrixExp "\\" MatrixExp -> MatrixExp
     } 
   > {left:
-      Exp "+" Exp -> Exp
-      Exp "-" Exp -> Exp
+  	  MatrixExp "+" MatrixExp -> MatrixExp
+      ScalarExp "+" ScalarExp -> ScalarExp
+      MatrixExp "-" MatrixExp -> MatrixExp
+      ScalarExp "-" ScalarExp -> ScalarExp
     }
