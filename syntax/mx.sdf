@@ -6,6 +6,9 @@ imports Common
 
 exports
 
+  sorts
+  	MatrixExp ScalarExp Exp
+  	
   context-free start-symbols
     Exp
 
