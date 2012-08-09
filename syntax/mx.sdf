@@ -7,11 +7,34 @@ imports Common
 exports
 
   context-free start-symbols
-    Start
+    Exp
 
   context-free syntax
-  
-    "module" ID Definition*       -> Start {cons("Module")}
-    "entity" ID "{" Property* "}" -> Definition {cons("Entity")}
-    ID ":" Type                   -> Property {cons("Property")}
-    ID                            -> Type {cons("Type")}
+	
+	Id          -> Exp {cons("Matrix")} 
+    Int		    -> Exp {cons("Int")}
+    Float	    -> Exp {cons("Float")} 
+    "(" Exp ")" -> Exp {bracket}
+    
+    Exp Exp -> Exp {left, cons("Mul")} 
+     
+    Exp "+" Exp -> Exp {left, cons("Add")} 
+    Exp "-" Exp -> Exp {left, cons("Sub")}
+    Exp "\\" Exp -> Exp {left, cons("Backsolve")}
+    
+    Exp "'" 	-> Exp {cons("Transpose")}
+    "inverse("Exp")" -> Exp{cons("Inverse")}
+
+    
+  context-free priorities 
+  	{right:
+  	 Exp "'" 	-> Exp	
+  	}
+  > {left:
+      Exp Exp -> Exp
+      Exp "\\" Exp -> Exp
+    } 
+  > {left:
+      Exp "+" Exp -> Exp
+      Exp "-" Exp -> Exp
+    }

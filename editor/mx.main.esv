@@ -13,4 +13,4 @@ language General properties
                   
   extensions    : mx
   table         : include/mx.tbl
-  start symbols : Start
+  start symbols : Exp
