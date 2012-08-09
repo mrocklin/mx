@@ -1,0 +1,54 @@
+module algebra
+
+imports Common
+
+exports
+
+  sorts
+    MatrixExp ScalarExp Exp
+    
+  context-free start-symbols
+    Exp
+
+  context-free syntax
+    MatrixExp ->  Exp
+    ScalarExp ->  Exp
+    UpperId             -> MatrixExp {cons("Matrix")}
+    LowerId             -> ScalarExp {cons("Scalar")}  
+    Int                 -> ScalarExp {cons("Int")}
+    Float               -> ScalarExp {cons("Float")} 
+    "Identity"          -> MatrixExp {cons("Identity")}
+    "(" MatrixExp ")"   -> MatrixExp {bracket}
+    "(" ScalarExp ")"   -> ScalarExp {bracket}    
+    
+    MatrixExp MatrixExp -> MatrixExp {left, cons("Mul")}
+    ScalarExp MatrixExp -> MatrixExp {left, cons("Mul")}
+    ScalarExp ScalarExp -> ScalarExp {left, cons("Mul")} 
+     
+    MatrixExp "+" MatrixExp    -> MatrixExp {left, cons("Add")}
+    ScalarExp "+" ScalarExp    -> ScalarExp {left, cons("Add")}
+    MatrixExp "-" MatrixExp    -> MatrixExp {left, cons("Sub")}
+    ScalarExp "-" ScalarExp    -> ScalarExp {left, cons("Sub")} 
+    
+    MatrixExp "\\" MatrixExp   -> MatrixExp {left, cons("Backsolve")}
+    
+    MatrixExp "'"            -> MatrixExp {cons("Transpose")}
+    "inverse("MatrixExp")"   -> MatrixExp{cons("Inverse")}
+
+    
+  context-free priorities 
+    {right:
+      MatrixExp "'"         -> MatrixExp        
+    }
+  > {left:
+      MatrixExp MatrixExp -> MatrixExp
+      ScalarExp MatrixExp -> MatrixExp
+      ScalarExp ScalarExp -> ScalarExp
+      MatrixExp "\\" MatrixExp -> MatrixExp
+    } 
+  > {left:
+      MatrixExp "+" MatrixExp -> MatrixExp
+      ScalarExp "+" ScalarExp -> ScalarExp
+      MatrixExp "-" MatrixExp -> MatrixExp
+      ScalarExp "-" ScalarExp -> ScalarExp
+    }

@@ -1,0 +1,19 @@
+module assumptions
+
+imports Common algebra bool
+
+exports
+
+  sorts
+    Predicate AppliedPredicate Context
+    
+  context-free start-symbols
+    Context 
+    
+  context-free syntax
+    LowerId -> Predicate            
+    MatrixExp "is" Predicate -> AppliedPredicate {cons("Is")}
+    {AppliedPredicate ","}+ -> Context {cons("Context")}
+    
+    Context "=>" Context -> Bool {cons("Implies")}
+

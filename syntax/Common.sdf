@@ -24,8 +24,10 @@ exports
     "//" ~[\n\r]* ([\n\r] | EOF)     -> LAYOUT
     
     -> EOF
+    
   "inverse"   -> LowerId {reject}
   "transpose" -> LowerId {reject}
+  "symmetric" "orthogonal" "positive-definite" "singular" "invertible" -> LowerId {reject}
   
   lexical restrictions
   
