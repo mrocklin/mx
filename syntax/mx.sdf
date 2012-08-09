@@ -10,15 +10,15 @@ exports
     Exp
 
   context-free syntax
-	MatrixExp ->  Exp
-	ScalarExp ->  Exp
-	UpperId        -> MatrixExp {cons("Matrix")}
-	LowerId        -> ScalarExp {cons("Scalar")}  
-    Int		       -> ScalarExp {cons("Int")}
-    Float	       -> ScalarExp {cons("Float")} 
-    "Identity"     -> MatrixExp {cons("Identity")}
-	"(" MatrixExp ")"    -> MatrixExp {bracket}
-	"(" ScalarExp ")"    -> ScalarExp {bracket}    
+    MatrixExp ->  Exp
+    ScalarExp ->  Exp
+    UpperId             -> MatrixExp {cons("Matrix")}
+    LowerId             -> ScalarExp {cons("Scalar")}  
+    Int                 -> ScalarExp {cons("Int")}
+    Float               -> ScalarExp {cons("Float")} 
+    "Identity"          -> MatrixExp {cons("Identity")}
+    "(" MatrixExp ")"   -> MatrixExp {bracket}
+    "(" ScalarExp ")"   -> ScalarExp {bracket}    
     
     MatrixExp MatrixExp -> MatrixExp {left, cons("Mul")}
     ScalarExp MatrixExp -> MatrixExp {left, cons("Mul")}
@@ -31,14 +31,14 @@ exports
     
     MatrixExp "\\" MatrixExp   -> MatrixExp {left, cons("Backsolve")}
     
-    MatrixExp "'" 	   -> MatrixExp {cons("Transpose")}
-    "inverse("MatrixExp")" -> MatrixExp{cons("Inverse")}
+    MatrixExp "'"            -> MatrixExp {cons("Transpose")}
+    "inverse("MatrixExp")"   -> MatrixExp{cons("Inverse")}
 
     
   context-free priorities 
-  	{right:
-  	 MatrixExp "'" 	-> MatrixExp	
-  	}
+    {right:
+      MatrixExp "'"         -> MatrixExp        
+    }
   > {left:
       MatrixExp MatrixExp -> MatrixExp
       ScalarExp MatrixExp -> MatrixExp
@@ -46,7 +46,7 @@ exports
       MatrixExp "\\" MatrixExp -> MatrixExp
     } 
   > {left:
-  	  MatrixExp "+" MatrixExp -> MatrixExp
+      MatrixExp "+" MatrixExp -> MatrixExp
       ScalarExp "+" ScalarExp -> ScalarExp
       MatrixExp "-" MatrixExp -> MatrixExp
       ScalarExp "-" ScalarExp -> ScalarExp

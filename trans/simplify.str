@@ -6,19 +6,19 @@ imports
   lib/editor-common.generated
 
 rules
-	do-simplify:
-  	  e -> result
+        do-simplify:
+            e -> result
       where
         result := <bottomup(try(simplify))> e
       
-	simplify:
-		Transpose(Transpose(x)) -> x
-		
-	simplify:
-		Inverse(Inverse(x)) -> x
-		
-	simplify:
-		Add(X, X) -> Mul(2, X)
-		
-	simplify:
-		Backsolve(x, x) -> Identity()
+        simplify:
+                Transpose(Transpose(x)) -> x
+                
+        simplify:
+                Inverse(Inverse(x)) -> x
+                
+        simplify:
+                Add(X, X) -> Mul(2, X)
+                
+        simplify:
+                Backsolve(x, x) -> Identity()
