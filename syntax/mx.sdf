@@ -11,18 +11,19 @@ exports
 
   context-free syntax
 	
-	Id          -> Exp {cons("Matrix")} 
-    Int		    -> Exp {cons("Int")}
-    Float	    -> Exp {cons("Float")} 
-    "(" Exp ")" -> Exp {bracket}
+	Id             -> Exp {cons("Matrix")} 
+    Int		       -> Exp {cons("Int")}
+    Float	       -> Exp {cons("Float")} 
+    "Identity"     -> Exp {cons("Identity")}
+    "(" Exp ")"    -> Exp {bracket}
     
-    Exp Exp -> Exp {left, cons("Mul")} 
+    Exp Exp        -> Exp {left, cons("Mul")} 
      
-    Exp "+" Exp -> Exp {left, cons("Add")} 
-    Exp "-" Exp -> Exp {left, cons("Sub")}
-    Exp "\\" Exp -> Exp {left, cons("Backsolve")}
+    Exp "+" Exp    -> Exp {left, cons("Add")} 
+    Exp "-" Exp    -> Exp {left, cons("Sub")}
+    Exp "\\" Exp   -> Exp {left, cons("Backsolve")}
     
-    Exp "'" 	-> Exp {cons("Transpose")}
+    Exp "'" 	   -> Exp {cons("Transpose")}
     "inverse("Exp")" -> Exp{cons("Inverse")}
 
     
