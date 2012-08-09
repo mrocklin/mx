@@ -11,11 +11,11 @@ exports
     Bool 
     
   context-free syntax
-    Id -> Bool {cons("BoolSymbol")}
-    "true" -> Bool {cons("True")}
-    "false" -> Bool {cons("False")}
+    "true"          -> Bool {cons("True")}
+    "false"         -> Bool {cons("False")}
     Bool "and" Bool -> Bool {left, cons("And")}
-    Bool "or" Bool -> Bool {left, cons("Or")}
+    Bool "or" Bool  -> Bool {left, cons("Or")}
+    "("Bool")"      -> Bool {bracket}
     
   context-free priorities 
    {left:

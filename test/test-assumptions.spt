@@ -1,0 +1,17 @@
+/**
+* Unit tests for the mx language.
+*/
+module test-assumptions
+
+language mx
+
+setup Common [[
+
+]]
+
+test assumptions [[
+    X is symmetric , Y is symmetric => X Y is symmetric 
+]] 0 errors
+test predicate [[
+    X is symmetric 
+]] 0 errors

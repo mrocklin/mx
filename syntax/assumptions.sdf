@@ -8,7 +8,7 @@ exports
     Predicate AppliedPredicate Context
     
   context-free start-symbols
-    Context 
+    Context Bool
     
   context-free syntax
     LowerId -> Predicate            

@@ -1,0 +1,20 @@
+/**
+* Unit tests for the mx language.
+*/
+module test-bool
+
+language mx
+
+setup Common [[
+
+]]
+
+test and [[
+    true and false
+]]
+test or [[
+    true or false
+]]
+test complex [[
+    true and (true or false)
+]]
